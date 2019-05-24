@@ -25,9 +25,9 @@ InputType parseInput(const std::string &str, Item &item) {
     std::stringstream ss(str);
     char c;
     if ((ss >> item.value).get(c) >> item.priority && c == ':') {
-	static size_t counter = 0;
-	item.counter = ++counter;
-	return InputType::push;
+        static size_t counter = 0;
+        item.counter = ++counter;
+        return InputType::push;
     }
     return InputType::unknown;
 }
@@ -39,26 +39,26 @@ inline void printTop(const Buffer &buf) {
 int main() {
     Buffer buf(itemCmp);
     for (std::string input; std::getline(std::cin, input);) {
-	Item item;
-	switch (parseInput(input, item)) {
-	case InputType::push:
-	    buf.push(item);
-	    break;
+        Item item;
+        switch (parseInput(input, item)) {
+        case InputType::push:
+            buf.push(item);
+            break;
         case InputType::print:
-	    while (!buf.empty()) {
-		printTop(buf);
-		buf.pop();
-	    }
-	    break;
-	case InputType::get:
-	    if (!buf.empty()) printTop(buf);
-	    break;
-	case InputType::exit:
-	    return 0;
-	case InputType::unknown:
-	    std::cerr << "Unknown type of input!" << std::endl;
-	    break;
-	}
+            while (!buf.empty()) {
+                printTop(buf);
+                buf.pop();
+            }
+            break;
+        case InputType::get:
+            if (!buf.empty()) printTop(buf);
+            break;
+        case InputType::exit:
+            return 0;
+        case InputType::unknown:
+            std::cerr << "Unknown type of input!" << std::endl;
+            break;
+        }
     }
     return 0;
 }
